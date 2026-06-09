@@ -1,6 +1,7 @@
 import express from "express";
 import routes from "./routes";
 import { auth } from "./middleware/auth.middleware";
+import busRoutes from "./modules/bus/bus.routes";
 
 const app = express();
 
@@ -18,5 +19,5 @@ app.get("/test", auth, (req, res) => {
   });
 });
 
-
+app.use("/api/buses", busRoutes);
 export default app;
