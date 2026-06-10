@@ -41,4 +41,11 @@ export const createBus = async (
   return createdBus;
 };
 
+export const getAllBusesService = async () => {
+  const busesList = await prisma.bus.findMany();
+
+  return busesList;
+};
+
+
 

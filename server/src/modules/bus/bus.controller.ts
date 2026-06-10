@@ -40,3 +40,22 @@ export const createBus = async (
     });
   }
 };
+
+
+export const getAllBusesController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const buses = await busService.getAllBusesService();
+
+    return res.status(200).json({
+      message: "Buses fetched successfully",
+      buses,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
