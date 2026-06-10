@@ -64,4 +64,61 @@ export const getBusByIdService = async (
   return bus;
 };
 
+export const updateBusService = async (
+  busId: string,
+  busData: {
+    busNumber?: string;
+    busName?: string;
+    busType?: BusType;
+    totalSeats?: number;
+  }
+) => {
+
+  const existingBus =
+    await prisma.bus.findUnique({
+      where: {
+        id: busId,
+      },
+    });
+
+  if (!existingBus) {
+    throw new Error("Bus not found");
+  }
+
+  const updatedBus =
+    await prisma.bus.update({
+      where: {
+        id: busId,
+      },
+      data: busData,
+    });
+
+  return updatedBus;
+};
+
+export const deleteBusService = async (
+  busId: string
+) => {
+
+  const existingBus =
+    await prisma.bus.findUnique({
+      where: {
+        id: busId,
+      },
+    });
+
+  if (!existingBus) {
+    throw new Error("Bus not found");
+  }
+
+  const deletedBus =
+    await prisma.bus.delete({
+      where: {
+        id: busId,
+      },
+    });
+
+  return deletedBus;
+};
+
 

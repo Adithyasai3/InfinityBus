@@ -81,3 +81,50 @@ export const getBusByIdController = async (
     });
   }
 };
+
+export const updateBusController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const busId = req.params.id as string;
+
+    const updatedBus =
+      await busService.updateBusService(
+        busId,
+        req.body
+      );
+
+    return res.status(200).json({
+      message: "Bus updated successfully",
+      bus: updatedBus,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
+export const deleteBusController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const busId = req.params.id as string;
+
+    const deletedBus =
+      await busService.deleteBusService(
+        busId
+      );
+
+    return res.status(200).json({
+      message: "Bus deleted successfully",
+      bus: deletedBus,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      message: error.message,
+    });
+  }
+};

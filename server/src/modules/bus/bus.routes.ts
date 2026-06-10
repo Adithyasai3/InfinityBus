@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createBus, getAllBusesController,getBusByIdController } from "./bus.controller";
+import { createBus, getAllBusesController,getBusByIdController,updateBusController,deleteBusController} from "./bus.controller";
 import { auth } from "../../middleware/auth.middleware";
 import { requireRole } from "../../middleware/auth.middleware";
 
@@ -50,4 +50,17 @@ router.get(
   getBusByIdController
 );
 
+router.put(
+  "/:id",
+  auth,
+  requireRole("OPERATOR"),
+  updateBusController
+);
+
+router.delete(
+  "/:id",
+  auth,
+  requireRole("OPERATOR"),
+  deleteBusController
+);
 export default router;
