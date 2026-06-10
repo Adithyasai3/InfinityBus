@@ -48,4 +48,20 @@ export const getAllBusesService = async () => {
 };
 
 
+export const getBusByIdService = async (
+  busId: string
+) => {
+  const bus = await prisma.bus.findUnique({
+    where: {
+      id: busId,
+    },
+  });
+
+  if (!bus) {
+    throw new Error("Bus not found");
+  }
+
+  return bus;
+};
+
 

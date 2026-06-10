@@ -59,3 +59,25 @@ export const getAllBusesController = async (
     });
   }
 };
+
+export const getBusByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const busId = req.params.id as string;
+
+    const bus = await busService.getBusByIdService(
+      busId
+    );
+
+    return res.status(200).json({
+      message: "Bus fetched successfully",
+      bus,
+    });
+  } catch (error: any) {
+    return res.status(404).json({
+      message: error.message,
+    });
+  }
+};

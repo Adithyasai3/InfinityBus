@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createBus, getAllBusesController } from "./bus.controller";
+import { createBus, getAllBusesController,getBusByIdController } from "./bus.controller";
 import { auth } from "../../middleware/auth.middleware";
 import { requireRole } from "../../middleware/auth.middleware";
 
@@ -43,5 +43,11 @@ router.post(
 
 
 router.get("/",auth,getAllBusesController);
+
+router.get(
+  "/:id",
+  auth,
+  getBusByIdController
+);
 
 export default router;
