@@ -1,11 +1,44 @@
-import {Router} from "express";
-import  {createBus} from "./bus.controller";
+import { Router } from "express";
+import { createBus } from "./bus.controller";
 import { auth } from "../../middleware/auth.middleware";
 import { requireRole } from "../../middleware/auth.middleware";
-import { deflate } from "node:zlib";
+
+// ❌ Not needed here
+// import { deflate } from "node:zlib";
 
 const router = Router();
 
-router.post("/",auth,requireRole("OPERATOR"),createBus);
+/*
+|--------------------------------------------------------------------------
+| Create Bus Route
+|--------------------------------------------------------------------------
+| POST /api/buses
+|
+| Purpose:
+| - Allows operators to create a new bus.
+|
+| Middleware Flow:
+|
+| Request
+|   ↓
+| auth
+|   ↓
+| Verify JWT Token
+|   ↓
+| Extract userId & role
+|   ↓
+| requireRole("OPERATOR")
+|   ↓
+| Check Role
+|   ↓
+| createBus Controller
+|--------------------------------------------------------------------------
+*/
+router.post(
+  "/",
+  auth,
+  requireRole("OPERATOR"),
+  createBus
+);
 
 export default router;
