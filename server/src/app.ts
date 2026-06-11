@@ -2,7 +2,7 @@ import express from "express";
 import routes from "./routes";
 import { auth } from "./middleware/auth.middleware";
 import busRoutes from "./modules/bus/bus.routes";
-
+import tripRoutes from "./modules/trip/trip.routes";
 const app = express();
 
 /*
@@ -114,4 +114,5 @@ app.use("/api/buses", busRoutes);
 | Exporting app so it can be used in server.ts
 |--------------------------------------------------------------------------
 */
+app.use("/api/trips", tripRoutes);
 export default app;

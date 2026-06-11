@@ -178,3 +178,28 @@ export const login = async (
     });
   }
 };
+export const login2 = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+
+    const { email, password } = req.body;
+
+    const token = await loginService(
+      email,
+      password
+    );
+
+    console.log("TOKEN:", token);
+
+    res.json({
+      token,
+    });
+
+  } catch (error: any) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};

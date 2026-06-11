@@ -147,30 +147,21 @@ export const loginService = async (
 
   // Password mismatch
   if (!isPasswordValid) {
-    throw new Error("Invalid password");
-  }
+  throw new Error("Invalid password");
+}
 
-  /*
-  |--------------------------------------------------------------------------
-  | Generate JWT Token
-  |--------------------------------------------------------------------------
-  | Payload:
-  | {
-  |   userId,
-  |   role
-  | }
-  |
-  | This data can later be extracted
-  | using jwt.verify().
-  |--------------------------------------------------------------------------
-  */
-  const token = jwt.sign(
-    {
-      userId: user.id,
-      role: user.role,
-    },
-    "mysecretkey"
-  );
+console.log("USER:", user);
+console.log("USER ROLE:", user.role);
 
-  return token;
+const token = jwt.sign(
+  {
+    userId: user.id,
+    role: user.role,
+  },
+  "mysecretkey"
+);
+
+console.log("TOKEN CREATED");
+
+return token;
 };
